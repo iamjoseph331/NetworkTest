@@ -1,0 +1,14 @@
+D:\Users\h1110\Documents\FC\Server\GameServer\GameServer\bin\Debug\GameServer.exe.config
+D:\Users\h1110\Documents\FC\Server\GameServer\GameServer\bin\Debug\GameServer.exe
+D:\Users\h1110\Documents\FC\Server\GameServer\GameServer\bin\Debug\GameServer.pdb
+D:\Users\h1110\Documents\FC\Server\GameServer\GameServer\obj\Debug\GameServer.csprojAssemblyReference.cache
+D:\Users\h1110\Documents\FC\Server\GameServer\GameServer\obj\Debug\GameServer.csproj.CoreCompileInputs.cache
+D:\Users\h1110\Documents\FC\Server\GameServer\GameServer\obj\Debug\GameServer.exe
+D:\Users\h1110\Documents\FC\Server\GameServer\GameServer\obj\Debug\GameServer.pdb
+D:\Users\h1110\Documents\NetworkTest\Server\GameServer\GameServer\bin\Debug\GameServer.exe.config
+D:\Users\h1110\Documents\NetworkTest\Server\GameServer\GameServer\bin\Debug\GameServer.exe
+D:\Users\h1110\Documents\NetworkTest\Server\GameServer\GameServer\bin\Debug\GameServer.pdb
+D:\Users\h1110\Documents\NetworkTest\Server\GameServer\GameServer\obj\Debug\GameServer.csprojAssemblyReference.cache
+D:\Users\h1110\Documents\NetworkTest\Server\GameServer\GameServer\obj\Debug\GameServer.csproj.CoreCompileInputs.cache
+D:\Users\h1110\Documents\NetworkTest\Server\GameServer\GameServer\obj\Debug\GameServer.exe
+D:\Users\h1110\Documents\NetworkTest\Server\GameServer\GameServer\obj\Debug\GameServer.pdb
