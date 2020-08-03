@@ -16,6 +16,7 @@ public class Client : MonoBehaviour
     public TCP tcp;
     public UDP udp;
 
+    private bool isConnected = false;
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
 
@@ -38,9 +39,16 @@ public class Client : MonoBehaviour
         udp = new UDP();
     }
 
+    private void OnApplicationQuit()
+    {
+        Disconnect();
+    }
+
     public void ConnectedToServer()
     {
         InitializeClientData();
+
+        isConnected = true;
         tcp.Connect();
     }
 
@@ -102,7 +110,7 @@ public class Client : MonoBehaviour
                 int _bytelength = stream.EndRead(_result);
                 if (_bytelength <= 0)
                 {
-                    //todo disconnect
+                    instance.Disconnect();
                     return;
                 }
                 byte[] _data = new byte[_bytelength];
@@ -114,7 +122,7 @@ public class Client : MonoBehaviour
             catch (Exception _ex)
             {
                 Console.WriteLine($"Error receiving TCP data: {_ex}");
-                // todo disconnect
+                Disconnect();
             }
         }
         private bool HandleData(byte[] _data)
@@ -159,6 +167,16 @@ public class Client : MonoBehaviour
             }
 
             return false;
+        }
+
+        private void Disconnect()
+        {
+            instance.Disconnect();
+
+            stream = null;
+            receivedData = null;
+            receiveBuffer = null;
+            socket = null;
         }
     }
 
@@ -210,14 +228,14 @@ public class Client : MonoBehaviour
 
                 if (_data.Length < 4)
                 {
-                    //todo disconnect
+                    instance.Disconnect();
                     return;
                 }
                 HandleData(_data);
             }
-            catch (Exception _ex)
+            catch 
             {
-                Debug.Log($"{_ex}");
+                Disconnect();
             }
         }
 
@@ -238,14 +256,36 @@ public class Client : MonoBehaviour
                 }
             });
         }
+
+        private void Disconnect()
+        {
+            instance.Disconnect();
+
+            endPoint = null;
+            socket = null;
+        }
     }
 
     private void InitializeClientData()
     {
         packetHandlers = new Dictionary<int, PacketHandler>() {
                 { (int)ServerPackets.welcome, ClientHandle.Welcome},
-                { (int)ServerPackets.udpTest, ClientHandle.UDPTest}
+                { (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer},
+                { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition},
+                { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation},
         };
         Debug.Log("Initialize packets.");
+    }
+
+    private void Disconnect()
+    {
+        if (isConnected)
+        {
+            isConnected = false;
+            tcp.socket.Close();
+            udp.socket.Close();
+
+            Debug.Log("Disconnected from server.");
+        }
     }
 }
